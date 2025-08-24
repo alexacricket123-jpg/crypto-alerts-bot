@@ -4,7 +4,8 @@ from telegram import Bot
 
 # Apna Telegram Bot Token aur Group ID yaha daalo
 TELEGRAM_TOKEN = "8009747355:AAGYatUtTVNTM9F62Av6BF6snUV_sm26EnQ"
-TELEGRAM_GROUP_ID = "1002817409395"
+TELEGRAM_GROUP_ID = "-1002817409395
+"
 
 bot = Bot(token=TELEGRAM_TOKEN)
 
@@ -40,3 +41,4 @@ async def send_alerts():
 
 if __name__ == "__main__":
     asyncio.run(send_alerts())
+
