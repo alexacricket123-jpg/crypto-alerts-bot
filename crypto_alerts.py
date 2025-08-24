@@ -18,27 +18,29 @@ COINS = {
 }
 
 async def send_alerts():
-    message = ""
-    for coin, symbol in COINS.items():
-        try:
-            url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin}&vs_currencies=usd"
-            response = requests.get(url, timeout=10)
-            data = response.json()
-            price = data[coin]["usd"]
+    while True:
+        message = ""
+        for coin, symbol in COINS.items():
+            try:
+                url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin}&vs_currencies=usd"
+                response = requests.get(url, timeout=10)
+                data = response.json()
+                price = data[coin]["usd"]
 
-            message += (
-                f"{symbol} Price Alert ✅\n"
-                f"Price: ${price}\n"
-                "Trade Smart! 🚀\n"
-                "----------------------------------------\n"
-            )
-        except Exception as e:
-            message += f"{symbol} ❌ Error fetching price: {e}\n"
+                message += (
+                    f"{symbol} Price Alert ✅\n"
+                    f"Price: ${price}\n"
+                    "Trade Smart! 🚀\n"
+                    "----------------------------------------\n"
+                )
+            except Exception as e:
+                message += f"{symbol} ❌ Error fetching price: {e}\n"
 
-    # Telegram group me bhejna
-    await bot.send_message(chat_id=TELEGRAM_GROUP_ID, text=message)
+        # Telegram group me bhejna
+        await bot.send_message(chat_id=TELEGRAM_GROUP_ID, text=message)
+
+        # 5 minute wait karo
+        await asyncio.sleep(300)  # 300 seconds = 5 minutes
 
 if __name__ == "__main__":
     asyncio.run(send_alerts())
-
-
